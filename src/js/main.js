@@ -8,15 +8,23 @@ class TodoList {
 
 class TodoItem {
 	constructor(text) {
-		this.$text = text;
+		this.$text = text
+		this.done = false
 		
 		this.$todoLI = document.createElement("li");
 		this.$todoUL = document.querySelector("ul");
-		this.$todoLI.innerHTML = this.$text
-		this.$todoUL.appendChild(this.$todoLI)
-	
 
+		this.$doneButton = document.createElement("button")
+		this.$doneButton.textContent = "Done"
+		this.$doneButton.classList.add("done")
+		this.$todoLI.innerHTML = this.$text
+		this.$todoLI.appendChild(this.$doneButton)
+		this.$todoUL.appendChild(this.$todoLI)
 		
+	}
+
+	updateView(){
+
 	}
 }
 
