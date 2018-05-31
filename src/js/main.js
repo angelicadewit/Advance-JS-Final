@@ -4,6 +4,7 @@ class TodoList {
 	}
 }
 
+let $todoUL = document.querySelector(`.todo ul`)
 
 
 class TodoItem {
@@ -17,14 +18,25 @@ class TodoItem {
 		this.$doneButton = document.createElement("button")
 		this.$doneButton.textContent = "Done"
 		this.$doneButton.classList.add("done")
-		this.$todoLI.innerHTML = this.$text
+		this.$todoLI.textContent = this.$text
 		this.$todoLI.appendChild(this.$doneButton)
 		this.$todoUL.appendChild(this.$todoLI)
+
+		this.$doneButton.addEventListener(`click`, this.changeStatus.bind(this))
 		
 	}
 
-	updateView(){
+	changeStatus(){
+		this.done = !this.done;
+		this.updateView();
+	}
 
+	updateView(){
+		if (this.done === true){
+			this.$todoLI.classList.add("done")
+		} else {
+			this.$todoLI.classList.remove("done")
+		}
 	}
 }
 

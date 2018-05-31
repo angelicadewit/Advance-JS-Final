@@ -8,6 +8,8 @@ var TodoList = function TodoList() {
 	_classCallCheck(this, TodoList);
 };
 
+var $todoUL = document.querySelector(".todo ul");
+
 var TodoItem = function () {
 	function TodoItem(text) {
 		_classCallCheck(this, TodoItem);
@@ -21,14 +23,28 @@ var TodoItem = function () {
 		this.$doneButton = document.createElement("button");
 		this.$doneButton.textContent = "Done";
 		this.$doneButton.classList.add("done");
-		this.$todoLI.innerHTML = this.$text;
+		this.$todoLI.textContent = this.$text;
 		this.$todoLI.appendChild(this.$doneButton);
 		this.$todoUL.appendChild(this.$todoLI);
+
+		this.$doneButton.addEventListener("click", this.changeStatus.bind(this));
 	}
 
 	_createClass(TodoItem, [{
+		key: "changeStatus",
+		value: function changeStatus() {
+			this.done = !this.done;
+			this.updateView();
+		}
+	}, {
 		key: "updateView",
-		value: function updateView() {}
+		value: function updateView() {
+			if (this.done === true) {
+				this.$todoLI.classList.add("done");
+			} else {
+				this.$todoLI.classList.remove("done");
+			}
+		}
 	}]);
 
 	return TodoItem;
