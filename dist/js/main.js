@@ -27,12 +27,12 @@ var TodoItem = function () {
 		this.$todoLI.appendChild(this.$doneButton);
 		this.$todoUL.appendChild(this.$todoLI);
 
-		this.$doneButton.addEventListener("click", this.changeStatus.bind(this));
+		this.$doneButton.addEventListener("click", this.toggleChangeStatus.bind(this));
 	}
 
 	_createClass(TodoItem, [{
-		key: "changeStatus",
-		value: function changeStatus() {
+		key: "toggleChangeStatus",
+		value: function toggleChangeStatus() {
 			this.done = !this.done;
 			this.updateView();
 		}
