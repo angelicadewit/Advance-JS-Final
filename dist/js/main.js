@@ -11,8 +11,8 @@ var TodoItem = function TodoItem(text) {
 
 	this.$text = text;
 
-	this.$todoUL = document.createElement("ul");
 	this.$todoLI = document.createElement("li");
+	this.$todoUL = document.querySelector("ul");
 	this.$todoLI.innerHTML = this.$text;
 	this.$todoUL.appendChild(this.$todoLI);
 };
