@@ -22,12 +22,11 @@ var TodoList = function () {
 	_createClass(TodoList, [{
 		key: "addNewItem",
 		value: function addNewItem() {
-
-			this.todoItems = [];
-			this.todoItems.push(this.$field.value);
+			this.newItem = this.$field.value;
+			this.todoItems.push(this.newItem);
 			console.log(this.todoItems);
-			this.updateView();
 			this.$field.value = "";
+			this.updateView();
 		}
 	}, {
 		key: "updateView",
@@ -35,7 +34,6 @@ var TodoList = function () {
 			var _this2 = this;
 
 			this.todoItems.forEach(function ($todoItem) {
-				_this2.$text = _this2.$field.value;
 				_this2.done = false;
 
 				_this2.$todoLI = document.createElement("li");
@@ -44,10 +42,14 @@ var TodoList = function () {
 				_this2.$doneButton = document.createElement("button");
 				_this2.$doneButton.textContent = "Done";
 				_this2.$doneButton.classList.add("done");
-				_this2.$todoLI.textContent = _this2.$text;
+				_this2.$todoLI.textContent = _this2.newItem;
 				_this2.$todoLI.appendChild(_this2.$doneButton);
-				_this2.$todoUL.appendChild(_this2.$todoLI);
 			});
+
+			this.$todoUL.appendChild(this.$todoLI);
+
+			this.$totalItems = document.querySelector(".total");
+			this.$totalItems.textContent = this.todoItems.length;
 		}
 	}]);
 

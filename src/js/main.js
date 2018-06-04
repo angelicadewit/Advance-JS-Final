@@ -11,18 +11,16 @@ class TodoList {
 	}
 
 	addNewItem(){
-
-		this.todoItems = []
-		this.todoItems.push(this.$field.value)
+		this.newItem = this.$field.value
+		this.todoItems.push(this.newItem)
 		console.log(this.todoItems)
-		this.updateView()
 		this.$field.value = ""
+		this.updateView()
 	}
 
 	updateView(){
 
 		this.todoItems.forEach($todoItem => {
-			this.$text = this.$field.value
 			this.done = false
 			
 			this.$todoLI = document.createElement("li");
@@ -31,11 +29,14 @@ class TodoList {
 			this.$doneButton = document.createElement("button")
 			this.$doneButton.textContent = "Done"
 			this.$doneButton.classList.add("done")
-			this.$todoLI.textContent = this.$text
+			this.$todoLI.textContent = this.newItem
 			this.$todoLI.appendChild(this.$doneButton)
-			this.$todoUL.appendChild(this.$todoLI)
-
 		})
+
+		this.$todoUL.appendChild(this.$todoLI)
+		
+		this.$totalItems = document.querySelector(".total")
+		this.$totalItems.textContent = this.todoItems.length
 	}
 }
 
