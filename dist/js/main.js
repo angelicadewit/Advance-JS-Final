@@ -10,9 +10,8 @@ var TodoList = function () {
 
 		_classCallCheck(this, TodoList);
 
-		this.todoItem = [];
 		this.$field = document.querySelector('input[name="new-item"]');
-
+		this.todoItems = [];
 		this.$field.addEventListener("keypress", function (e) {
 			if (e.keyCode === 13) {
 				_this.addNewItem();
@@ -23,8 +22,32 @@ var TodoList = function () {
 	_createClass(TodoList, [{
 		key: "addNewItem",
 		value: function addNewItem() {
+
+			this.todoItems = [];
+			this.todoItems.push(this.$field.value);
+			console.log(this.todoItems);
+			this.updateView();
 			this.$field.value = "";
-			console.log("hello");
+		}
+	}, {
+		key: "updateView",
+		value: function updateView() {
+			var _this2 = this;
+
+			this.todoItems.forEach(function ($todoItem) {
+				_this2.$text = _this2.$field.value;
+				_this2.done = false;
+
+				_this2.$todoLI = document.createElement("li");
+				_this2.$todoUL = document.querySelector("ul");
+
+				_this2.$doneButton = document.createElement("button");
+				_this2.$doneButton.textContent = "Done";
+				_this2.$doneButton.classList.add("done");
+				_this2.$todoLI.textContent = _this2.$text;
+				_this2.$todoLI.appendChild(_this2.$doneButton);
+				_this2.$todoUL.appendChild(_this2.$todoLI);
+			});
 		}
 	}]);
 
@@ -35,22 +58,22 @@ var $todoUL = document.querySelector(".todo ul");
 
 var TodoItem = function () {
 	function TodoItem(text) {
+		// this.$text = text
+		// this.done = false
+
+		// this.$todoLI = document.createElement("li");
+		// this.$todoUL = document.querySelector("ul");
+
+		// this.$doneButton = document.createElement("button")
+		// this.$doneButton.textContent = "Done"
+		// this.$doneButton.classList.add("done")
+		// this.$todoLI.textContent = this.$text
+		// this.$todoLI.appendChild(this.$doneButton)
+		// this.$todoUL.appendChild(this.$todoLI)
+
+		// this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this))
+
 		_classCallCheck(this, TodoItem);
-
-		this.$text = text;
-		this.done = false;
-
-		this.$todoLI = document.createElement("li");
-		this.$todoUL = document.querySelector("ul");
-
-		this.$doneButton = document.createElement("button");
-		this.$doneButton.textContent = "Done";
-		this.$doneButton.classList.add("done");
-		this.$todoLI.textContent = this.$text;
-		this.$todoLI.appendChild(this.$doneButton);
-		this.$todoUL.appendChild(this.$todoLI);
-
-		this.$doneButton.addEventListener("click", this.toggleChangeStatus.bind(this));
 	}
 
 	_createClass(TodoItem, [{

@@ -1,8 +1,8 @@
 class TodoList {
-	constructor() {
-		this.todoItem = []
-		this.$field = document.querySelector('input[name="new-item"]')
 
+	constructor() {
+		this.$field = document.querySelector('input[name="new-item"]')
+		this.todoItems = []
 		this.$field.addEventListener(`keypress`, (e) => {
 			if (e.keyCode === 13){
 				this.addNewItem()
@@ -11,8 +11,31 @@ class TodoList {
 	}
 
 	addNewItem(){
+
+		this.todoItems = []
+		this.todoItems.push(this.$field.value)
+		console.log(this.todoItems)
+		this.updateView()
 		this.$field.value = ""
-		console.log("hello")
+	}
+
+	updateView(){
+
+		this.todoItems.forEach($todoItem => {
+			this.$text = this.$field.value
+			this.done = false
+			
+			this.$todoLI = document.createElement("li");
+			this.$todoUL = document.querySelector("ul");
+	
+			this.$doneButton = document.createElement("button")
+			this.$doneButton.textContent = "Done"
+			this.$doneButton.classList.add("done")
+			this.$todoLI.textContent = this.$text
+			this.$todoLI.appendChild(this.$doneButton)
+			this.$todoUL.appendChild(this.$todoLI)
+
+		})
 	}
 }
 
@@ -21,20 +44,20 @@ let $todoUL = document.querySelector(`.todo ul`)
 
 class TodoItem {
 	constructor(text) {
-		this.$text = text
-		this.done = false
+		// this.$text = text
+		// this.done = false
 		
-		this.$todoLI = document.createElement("li");
-		this.$todoUL = document.querySelector("ul");
+		// this.$todoLI = document.createElement("li");
+		// this.$todoUL = document.querySelector("ul");
 
-		this.$doneButton = document.createElement("button")
-		this.$doneButton.textContent = "Done"
-		this.$doneButton.classList.add("done")
-		this.$todoLI.textContent = this.$text
-		this.$todoLI.appendChild(this.$doneButton)
-		this.$todoUL.appendChild(this.$todoLI)
+		// this.$doneButton = document.createElement("button")
+		// this.$doneButton.textContent = "Done"
+		// this.$doneButton.classList.add("done")
+		// this.$todoLI.textContent = this.$text
+		// this.$todoLI.appendChild(this.$doneButton)
+		// this.$todoUL.appendChild(this.$todoLI)
 
-		this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this))
+		// this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this))
 		
 	}
 
