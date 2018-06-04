@@ -4,9 +4,32 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var TodoList = function TodoList() {
-	_classCallCheck(this, TodoList);
-};
+var TodoList = function () {
+	function TodoList() {
+		var _this = this;
+
+		_classCallCheck(this, TodoList);
+
+		this.todoItem = [];
+		this.$field = document.querySelector('input[name="new-item"]');
+
+		this.$field.addEventListener("keypress", function (e) {
+			if (e.keyCode === 13) {
+				_this.addNewItem();
+			}
+		});
+	}
+
+	_createClass(TodoList, [{
+		key: "addNewItem",
+		value: function addNewItem() {
+			this.$field.value = "";
+			console.log("hello");
+		}
+	}]);
+
+	return TodoList;
+}();
 
 var $todoUL = document.querySelector(".todo ul");
 

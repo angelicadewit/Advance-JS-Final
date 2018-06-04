@@ -1,6 +1,18 @@
 class TodoList {
 	constructor() {
-		
+		this.todoItem = []
+		this.$field = document.querySelector('input[name="new-item"]')
+
+		this.$field.addEventListener(`keypress`, (e) => {
+			if (e.keyCode === 13){
+				this.addNewItem()
+			}
+		  });
+	}
+
+	addNewItem(){
+		this.$field.value = ""
+		console.log("hello")
 	}
 }
 
