@@ -7,37 +7,35 @@ class TodoList {
 			if (e.keyCode === 13){
 				this.addNewItem()
 			}
-		  });
+		});
 	}
 
 	addNewItem(){
-		this.newItem = this.$field.value
-		this.todoItems.push(this.newItem)
-		console.log(this.todoItems)
+		this.todoItems.push(new TodoItem(this.$field.value))
+		
 		this.$field.value = ""
 		this.updateView()
 	}
 
 	updateView(){
 
-		this.todoItems.forEach($todoItem => {
-			this.done = false
-			
-			this.$todoLI = document.createElement("li");
-			this.$todoUL = document.querySelector("ul");
-	
-			this.$doneButton = document.createElement("button")
-			this.$doneButton.textContent = "Done"
-			this.$doneButton.classList.add("done")
-			this.$todoLI.textContent = this.newItem
-			this.$todoLI.appendChild(this.$doneButton)
+		// console.log(this.todoItems)
+		//loop through the todoItems array, adding them all to the UL
+		this.todoItems.forEach((item) => {
+			$todoUL.appendChild(item.$todoLI)
 		})
-
-		this.$todoUL.appendChild(this.$todoLI)
+		// this.$todoUL.appendChild($todoItem)
 		
-		this.$totalItems = document.querySelector(".total")
-		this.$totalItems.textContent = this.todoItems.length
+		this.$totalItemsCounter = document.querySelector("span.total")
+		this.$doneItemsCounter = document.querySelector("span.done")
+		
+		this.$totalItemsCounter.textContent = this.todoItems.length;
+		
+		this.$doneItems = document.querySelectorAll("li.done");
+		console.log(this.$doneItems);
+		this.$doneItemsCounter.textContent = this.$doneItems.length
 	}
+	
 }
 
 let $todoUL = document.querySelector(`.todo ul`)
@@ -45,20 +43,19 @@ let $todoUL = document.querySelector(`.todo ul`)
 
 class TodoItem {
 	constructor(text) {
-		// this.$text = text
-		// this.done = false
+		this.$text = text
+		this.done = false
 		
-		// this.$todoLI = document.createElement("li");
-		// this.$todoUL = document.querySelector("ul");
+		this.$todoLI = document.createElement("li");
 
-		// this.$doneButton = document.createElement("button")
-		// this.$doneButton.textContent = "Done"
-		// this.$doneButton.classList.add("done")
-		// this.$todoLI.textContent = this.$text
-		// this.$todoLI.appendChild(this.$doneButton)
-		// this.$todoUL.appendChild(this.$todoLI)
-
-		// this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this))
+		this.$doneButton = document.createElement("button")
+		this.$doneButton.textContent = "Done"
+		this.$doneButton.classList.add("done")
+		this.$todoLI.textContent = this.$text
+		this.$todoLI.appendChild(this.$doneButton)
+		
+		console.log(this.$doneButton)
+		this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this));
 		
 	}
 
@@ -78,6 +75,6 @@ class TodoItem {
 
 
 let todoList = new TodoList();
-let todoItem1 = new TodoItem(`Milk`);
-let todoItem2 = new TodoItem(`Eggs`);
-let todoItem3 = new TodoItem(`Diapers`);
+// let todoItem1 = new TodoItem(`Milk`);
+// let todoItem2 = new TodoItem(`Eggs`);
+// let todoItem3 = new TodoItem(`Diapers`);
