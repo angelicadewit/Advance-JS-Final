@@ -18,7 +18,7 @@ var TodoList = function () {
 			}
 		});
 
-		window.addEventListener("toggleChangeStatus", this.updateView.bind(this));
+		window.addEventListener("toggleChangeStatus", event, false);
 	}
 
 	_createClass(TodoList, [{
@@ -28,6 +28,7 @@ var TodoList = function () {
 
 			this.$field.value = "";
 			this.updateView();
+			this.updateCode();
 		}
 	}, {
 		key: "updateView",
@@ -35,14 +36,16 @@ var TodoList = function () {
 			this.todoItems.forEach(function (item) {
 				$todoUL.appendChild(item.$todoLI);
 			});
-
+		}
+	}, {
+		key: "updateCode",
+		value: function updateCode() {
 			this.$totalItemsCounter = document.querySelector("span.total");
 			this.$doneItemsCounter = document.querySelector("span.done");
 
 			this.$totalItemsCounter.textContent = this.todoItems.length;
 
 			this.$doneItems = document.querySelectorAll("li.done");
-			console.log(this.$doneItems);
 			this.$doneItemsCounter.textContent = this.$doneItems.length;
 		}
 	}]);
@@ -67,11 +70,10 @@ var TodoItem = function () {
 		this.$todoLI.textContent = this.$text;
 		this.$todoLI.appendChild(this.$doneButton);
 
-		console.log(this.$doneButton);
 		this.$doneButton.addEventListener("click", this.toggleChangeStatus.bind(this));
 
-		// let event = new Event(`toggleChangeStatus`, {bubbles: true});
-		this.$doneButton.dispatchEvent(new CustomEvent("click", { bubbles: true }));
+		var event = new Event("toggleChangeStatus", { bubbles: true });
+		this.$doneButton.dispatchEvent(new CustomEvent("toggleChangeStatus"));
 	}
 
 	_createClass(TodoItem, [{
