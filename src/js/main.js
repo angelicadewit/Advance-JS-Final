@@ -8,6 +8,8 @@ class TodoList {
 				this.addNewItem()
 			}
 		});
+
+		window.addEventListener(`toggleChangeStatus`, this.updateView.bind(this));
 	}
 
 	addNewItem(){
@@ -30,8 +32,6 @@ class TodoList {
 		this.$doneItems = document.querySelectorAll("li.done");
 		console.log(this.$doneItems);
 		this.$doneItemsCounter.textContent = this.$doneItems.length
-
-		window.addEventListener(`click`, event)
 	}
 	
 }
@@ -55,13 +55,15 @@ class TodoItem {
 		console.log(this.$doneButton)
 		this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this));
 
-		
+		// let event = new Event(`toggleChangeStatus`, {bubbles: true});
+		this.$doneButton.dispatchEvent(new CustomEvent(`click`, { bubbles: true,}))
 	}
+
 
 	toggleChangeStatus(){
 		this.done = !this.done;
 		this.updateView();
-		window.dispatchEvent(event);
+		
 	}
 
 	updateView(){
@@ -70,8 +72,6 @@ class TodoItem {
 		} else {
 			this.$todoLI.classList.remove("done")
 		}
-
-		var ev = new Event(`toggleChangeStatus`, {"bubbles":true, "cancelable":false});
 	}
 }
 
