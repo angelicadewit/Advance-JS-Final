@@ -12,13 +12,15 @@ var TodoList = function () {
 
 		this.$field = document.querySelector('input[name="new-item"]');
 		this.todoItems = [];
-		this.$field.addEventListener("keypress", function (e) {
+		this.$field.addEventListener("keydown", function (e) {
 			if (e.keyCode === 13) {
 				_this.addNewItem();
 			}
 		});
 
-		window.addEventListener("toggleChangeStatus", event, false);
+		window.addEventListener("itemchanged", function () {
+			updateCode();
+		});
 	}
 
 	_createClass(TodoList, [{
@@ -71,9 +73,6 @@ var TodoItem = function () {
 		this.$todoLI.appendChild(this.$doneButton);
 
 		this.$doneButton.addEventListener("click", this.toggleChangeStatus.bind(this));
-
-		var event = new Event("toggleChangeStatus", { bubbles: true });
-		this.$doneButton.dispatchEvent(new CustomEvent("toggleChangeStatus"));
 	}
 
 	_createClass(TodoItem, [{
@@ -81,6 +80,9 @@ var TodoItem = function () {
 		value: function toggleChangeStatus() {
 			this.done = !this.done;
 			this.updateView();
+
+			// let event = new Event(`click`);
+			window.dispatchEvent("toggleChangeStatus");
 		}
 	}, {
 		key: "updateView",

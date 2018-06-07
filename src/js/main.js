@@ -3,13 +3,15 @@ class TodoList {
 	constructor() {
 		this.$field = document.querySelector('input[name="new-item"]')
 		this.todoItems = []
-		this.$field.addEventListener(`keypress`, (e) => {
+		this.$field.addEventListener(`keydown`, (e) => {
 			if (e.keyCode === 13){
 				this.addNewItem()
 			}
 		});
 
-		window.addEventListener(`toggleChangeStatus`, event, false)
+		window.addEventListener(`itemchanged`, function(){
+			updateCode()
+		})
 	}
 
 	addNewItem(){
@@ -57,8 +59,6 @@ class TodoItem {
 		
 		this.$doneButton.addEventListener(`click`, this.toggleChangeStatus.bind(this));
 
-		let event = new Event(`toggleChangeStatus`, {bubbles: true});
-		this.$doneButton.dispatchEvent(new CustomEvent(`toggleChangeStatus`))
 	}
 
 
@@ -66,6 +66,8 @@ class TodoItem {
 		this.done = !this.done;
 		this.updateView();
 		
+		// let event = new Event(`click`);
+		window.dispatchEvent(`toggleChangeStatus`)
 	}
 
 	updateView(){
