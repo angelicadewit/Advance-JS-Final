@@ -18,9 +18,7 @@ var TodoList = function () {
 			}
 		});
 
-		window.addEventListener("itemchanged", function () {
-			updateCode();
-		});
+		window.addEventListener("itemchanged", this.updateView.bind(this));
 	}
 
 	_createClass(TodoList, [{
@@ -30,7 +28,6 @@ var TodoList = function () {
 
 			this.$field.value = "";
 			this.updateView();
-			this.updateCode();
 		}
 	}, {
 		key: "updateView",
@@ -38,10 +35,7 @@ var TodoList = function () {
 			this.todoItems.forEach(function (item) {
 				$todoUL.appendChild(item.$todoLI);
 			});
-		}
-	}, {
-		key: "updateCode",
-		value: function updateCode() {
+
 			this.$totalItemsCounter = document.querySelector("span.total");
 			this.$doneItemsCounter = document.querySelector("span.done");
 
@@ -81,8 +75,8 @@ var TodoItem = function () {
 			this.done = !this.done;
 			this.updateView();
 
-			// let event = new Event(`click`);
-			window.dispatchEvent("toggleChangeStatus");
+			var event = new Event("itemchanged");
+			window.dispatchEvent(event);
 		}
 	}, {
 		key: "updateView",

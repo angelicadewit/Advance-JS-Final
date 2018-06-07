@@ -9,9 +9,7 @@ class TodoList {
 			}
 		});
 
-		window.addEventListener(`itemchanged`, function(){
-			updateCode()
-		})
+		window.addEventListener(`itemchanged`, this.updateView.bind(this))
 	}
 
 	addNewItem(){
@@ -19,16 +17,13 @@ class TodoList {
 		
 		this.$field.value = ""
 		this.updateView()
-		this.updateCode()
 	}
 
 	updateView(){
 		this.todoItems.forEach((item) => {
 			$todoUL.appendChild(item.$todoLI)
 		})
-	}
 
-	updateCode(){
 		this.$totalItemsCounter = document.querySelector("span.total")
 		this.$doneItemsCounter = document.querySelector("span.done")
 		
@@ -66,8 +61,8 @@ class TodoItem {
 		this.done = !this.done;
 		this.updateView();
 		
-		// let event = new Event(`click`);
-		window.dispatchEvent(`toggleChangeStatus`)
+		let event = new Event(`itemchanged`);
+		window.dispatchEvent(event)
 	}
 
 	updateView(){
