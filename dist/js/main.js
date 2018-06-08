@@ -12,8 +12,9 @@ var TodoList = function () {
 
 		this.$field = document.querySelector('input[name="new-item"]');
 		this.todoItems = [];
+
 		this.$field.addEventListener("keydown", function (e) {
-			if (e.keyCode === 13) {
+			if (e.keyCode === 13 && _this.$field.value) {
 				_this.addNewItem();
 			}
 		});
@@ -50,6 +51,7 @@ var TodoList = function () {
 }();
 
 var $todoUL = document.querySelector(".todo ul");
+var $errorMessage = document.querySelector("span.error-message");
 
 var TodoItem = function () {
 	function TodoItem(text) {

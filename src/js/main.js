@@ -3,8 +3,9 @@ class TodoList {
 	constructor() {
 		this.$field = document.querySelector('input[name="new-item"]')
 		this.todoItems = []
+
 		this.$field.addEventListener(`keydown`, (e) => {
-			if (e.keyCode === 13){
+			if (e.keyCode === 13 && this.$field.value){
 				this.addNewItem()
 			}
 		});
@@ -14,7 +15,7 @@ class TodoList {
 
 	addNewItem(){
 		this.todoItems.push(new TodoItem(this.$field.value))
-		
+
 		this.$field.value = ""
 		this.updateView()
 	}
@@ -32,10 +33,10 @@ class TodoList {
 		this.$doneItems = document.querySelectorAll("li.done");
 		this.$doneItemsCounter.textContent = this.$doneItems.length
 	}
-	
 }
 
 let $todoUL = document.querySelector(`.todo ul`)
+let $errorMessage = document.querySelector(`span.error-message`)
 
 
 class TodoItem {

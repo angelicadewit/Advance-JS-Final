@@ -24,7 +24,7 @@ TABLE OF CONTENTS:
 }
 
 body {
-	background: #ccc;
+	background: url("../../dist/img/background2.png");
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -34,16 +34,21 @@ body {
 /* 2. Content ================================= */
 
 .todo {
-	background: white;
+	background: #F9F7F8;
 	margin: 50px auto 0;
 	width: 100%;
 	max-width: 500px;
 	box-shadow: 0 20px 30px rgba(0,0,0,0.5);
 
+	.error-message{
+		opacity: 0;
+	}
+
 	h1 {
 		font-size: 2em;
 		font-weight: bold;
 		padding: 20px;
+		color: #0f7e9b;
 	}
 
 	input {
@@ -52,6 +57,7 @@ body {
 		padding: 5px 20px;
 		width: calc(100% - 40px);
 		margin: 20px;
+		border: 1px solid #000;
 	}
 
 	ul {
@@ -60,15 +66,19 @@ body {
 		flex-direction: column;
 
 		li {
-			border-top: 1px solid #aaa;
+			border-top: 1px solid #000;
+			background: #92d7ef;
 			padding: 20px; 
 			
 			&:nth-child(odd) {
-				background: #eee;
+				background: #f9acbb;
 			}
 
 			button {
 				float: right;
+				background: #F3DFFC;
+				border: 1px solid black;
+				padding: 5px 10px;
 			}
 			&.done {
 				font-size: 0.75em;
@@ -76,6 +86,10 @@ body {
 				padding: 10px 20px;
 				opacity: 0.5;
 				text-decoration: line-through;
+
+				button{
+					padding: 2px 5px;
+				}
 			}
 		}
 	}
@@ -83,6 +97,6 @@ body {
 	> p {
 		font-size: 0.66em;
 		padding: 5px 20px;
-		color: #aaa;
+		color: #454545;
 	}
 }
